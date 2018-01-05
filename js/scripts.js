@@ -57,7 +57,7 @@ function newGame() {
         setGameElements();
 
         playerNameElem.innerHTML = player.name;
-        //setGamePoints(); //This function has not been created yet
+        setGamePoints(); //This function has not been created yet
     }
 }
 //Wybór gracza oraz komputera
@@ -71,4 +71,41 @@ function playerPick(playerPick) {
 function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
     return possiblePicks[Math.floor(Math.random()*3)];
+}
+//Przyznawanie punktów
+function checkRoundWinner(playerPick, computerPick) {
+    playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+
+    var winnerIs = 'player';
+
+    if (playerPick == computerPick) {
+        winnerIs = 'noone'; //remis
+    } else if (
+        (computerPick == 'rock' && playerPick == 'scissors') ||
+        (computerPick == 'scissors' && playerPick == 'paper') ||
+        (computerPick == 'paper' && playerPick == 'rock')) {
+            
+        winnerIs = 'computer';
+        }
+    if (winnerIs == 'player') {
+        playerResultElem.innerHTML = "Wygrana!";
+        player.score++;
+    } else if (winnerIs == 'computer') {
+        computerResultElem.innerHTML = 'Wygrana!';
+        computer.score++;
+    }
+}
+
+function setGamePoints() {
+    var computerPick = getComputerPick();
+
+    playerPickElem.innerHTML = playerPick;
+    computerPickElem.innerHTML = computerPick;
+
+    checkRoundWinner(playerPick, computerPick);
+}
+//Aktualizacja wyniku
+function setGamePoints() {
+    playerPointsElem.innerHTML = player.score;
+    computerPointsElem.innerHTML = computer.score;
 }
