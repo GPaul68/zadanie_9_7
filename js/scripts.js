@@ -13,9 +13,7 @@ var gameState = 'notStarted', //started //ended
         score: 0
     };
 //Wyświetlanie elementów gry
-var newGameBtn = document.getElementById('js-newGameButton'),
-    endResult = document.getElementById('js-endResult'),
-    newGameElem = document.getElementById('js-newGameElement'),
+var newGameElem = document.getElementById('js-newGameElement'),
     pickElem = document.getElementById('js-playerPickElement'),
     resultsElem = document.getElementById('js-resultsTableElement'),
     playerNameElem = document.getElementById('js-playerName'),
@@ -41,7 +39,6 @@ function setGameElements () {
         break;
         case 'ended':
             newGameBtn.innerText = 'Jeszcze raz';
-            endResult.innerText = player.name + ': ' + player.score + ' - Komputer: ' + computer.score;
         case 'notStarted':
         default:
             newGameElem.style.display = 'block';
@@ -60,9 +57,8 @@ function newGame() {
         setGameElements();
 
         playerNameElem.innerHTML = player.name;
+        setGamePoints(); //This function has not been created yet
     }
-
-    setGamePoints(); //This function has not been created yet
 }
 //Wybór gracza oraz komputera
 function playerPick(playerPick) {
@@ -97,19 +93,28 @@ function checkRoundWinner(playerPick, computerPick) {
     if (winnerIs == 'player') {
         playerResultElem.innerHTML = "Wygrana!";
         player.score++;
+        setGamePoints(); 
     } else if (winnerIs == 'computer') {
         computerResultElem.innerHTML = 'Wygrana!';
         computer.score++;
-    }
-    setGamePoints(); 
-    if (computer.score==10 || player.score==10){
-    	gameState = 'ended';
-    	setGameElements();
+        setGamePoints(); 
     }
 }
-
 //Aktualizacja wyniku
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
+    checkGameWinner();
+}
+
+function checkGameWinner() {
+    if (player.score === 10) {
+        alert('Gratulacje! Zwyciężyłeś');
+        gameState = 'ended';
+        setGameElements();
+    } else if (computer.score === 10) {
+        alert('Koniec gry! Komputer zwyciężył');
+        gameState = 'ended';
+        setGameElements();
+    }
 }
