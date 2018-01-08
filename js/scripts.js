@@ -80,12 +80,12 @@ function checkRoundWinner(playerPick, computerPick) {
 
     var winnerIs = 'player';
 
-    if (playerPick == computerPick) {
+    if (playerPick === computerPick) {
         winnerIs = 'noone'; //Draw
     } else if (
-        (computerPick == 'rock' && playerPick == 'scissors') ||
-        (computerPick == 'scissors' && playerPick == 'paper') ||
-        (computerPick == 'paper' && playerPick == 'rock')) {
+        (computerPick === 'rock' && playerPick === 'scissors') ||
+        (computerPick === 'scissors' && playerPick === 'paper') ||
+        (computerPick === 'paper' && playerPick === 'rock')) {
             
         winnerIs = 'computer';
         }
