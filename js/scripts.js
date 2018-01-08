@@ -1,9 +1,9 @@
-//Wybieranie: papier/kamień/nożyce
+//Choising: paper/rock/scissors
 var newGameBtn = document.getElementById('js-newGameButton'),
     pickRock = document.getElementById('js-playerPick_rock'),
     pickPaper = document.getElementById('js-playerPick_paper'),
     pickScissors = document.getElementById('js-playerPick_scissors');
-//Wartości początkowe
+//Initial values
 var gameState = 'notStarted', //started //ended
     player = {
         name: '',
@@ -12,14 +12,14 @@ var gameState = 'notStarted', //started //ended
     computer = {
         score: 0
     };
-//Wyświetlanie elementów gry
+//Displaying game elements
 var newGameElem = document.getElementById('js-newGameElement'),
     pickElem = document.getElementById('js-playerPickElement'),
     resultsElem = document.getElementById('js-resultsTableElement'),
     playerNameElem = document.getElementById('js-playerName'),
     playerPointsElem = document.getElementById('js-playerPoints'),
     computerPointsElem = document.getElementById('js-computerPoints');
-//Wybór gracza
+//Player selection
 var playerPickElem = document.getElementById('js-playerPick'),
     computerPickElem = document.getElementById('js-computerPick'),
     playerResultElem = document.getElementById('js-playerResult'),
@@ -60,7 +60,7 @@ function newGame() {
         setGamePoints(); //This function has not been created yet
     }
 }
-//Wybór gracza oraz komputera
+//Choosing a player and a computer
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
 
@@ -74,14 +74,14 @@ function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
     return possiblePicks[Math.floor(Math.random()*3)];
 }
-//Przyznawanie punktów
+//Awarding points
 function checkRoundWinner(playerPick, computerPick) {
     playerResultElem.innerHTML = computerResultElem.innerHTML = '';
 
     var winnerIs = 'player';
 
     if (playerPick == computerPick) {
-        winnerIs = 'noone'; //remis
+        winnerIs = 'noone'; //Draw
     } else if (
         (computerPick == 'rock' && playerPick == 'scissors') ||
         (computerPick == 'scissors' && playerPick == 'paper') ||
@@ -100,7 +100,7 @@ function checkRoundWinner(playerPick, computerPick) {
         setGamePoints(); 
     }
 }
-//Aktualizacja wyniku
+//Result update
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
